@@ -1,0 +1,30 @@
+package protobuf.socketrpc;
+
+option py_generic_services = true;
+
+
+enum Command {
+POWER_OFF = 1;
+POWER_ON = 2;
+}
+
+message CommandRequest {
+required Command command = 1;
+optional string credentials = 2;
+}
+
+enum Response {
+RES_OK = 1;
+RES_ERR = 2;
+}
+
+message CommandResponse {
+required Response response = 1;
+optional string response_message = 2;
+}
+
+
+service PoshService
+{
+  rpc getCommandResponse(CommandRequest) returns(CommandResponse);
+}
